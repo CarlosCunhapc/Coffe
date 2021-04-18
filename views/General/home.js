@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {css} from '../assets/css/cssHome';
+import {css} from '../../assets/css/cssHome';
 import {
 View,
 Text,

@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {css} from '../assets/css/cssLogin';
+import {css} from '../../assets/css/cssLogin';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as LocalAuthentication from 'expo-local-authentication';
+import config from '../../config/config';
 import {
 View,
 Text,
@@ -14,6 +15,7 @@ Animated,
 
 export default function Login({navigation}) {
     const [display, setDisplay] = useState('none');
+    const [aviso, setAviso] = useState('');
     const [user, setUser] = useState(null);
     const [login, setLogin] = useState(null);
     const [password, setPassword] = useState(null);
@@ -66,7 +68,7 @@ export default function Login({navigation}) {
 
     //envio do formulário de login
     async function sendForm(){
-      let response=await fetch('http://192.168.0.10:3000/login', {
+      let response=await fetch(`${config.urlRoot}login`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -77,11 +79,12 @@ export default function Login({navigation}) {
           password: password
         })
       });
-
-      let json=await response.json();
-
+      
+      let json = await response.json();
+      
       //Teste login e senha
       if(json === 'error'){
+        setAviso('Login ou senha inválidos');
         setDisplay('flex');
         setTimeout(()=>{
           setDisplay('none');
@@ -93,6 +96,7 @@ export default function Login({navigation}) {
         navigation.navigate('userHome');
       }
     }
+
     //efeito de animação
     useEffect(()=> {
       Animated.spring(offset.y, {
@@ -109,11 +113,11 @@ export default function Login({navigation}) {
       //behavior={Platform.OS === "ios" ? "padding" : "height"} 
       style={css.container}>
         <View style={css.containerLogo}>
-          <Image source={require('../assets/images/cafeIcon.png')}/>
+          <Image source={require('../../assets/images/icon.png')}/>
         </View>
 
         <View>
-          <Text style={css.login__msg(display)}>Usuário ou senha errados!</Text>
+          <Text style={css.login__msg(display)}>{aviso}</Text>
         </View>
 
         <Animated.View 
@@ -126,7 +130,7 @@ export default function Login({navigation}) {
           }
           ]}
           >
-
+            <Text>{login} | {password}</Text>
           <TextInput 
           style={css.login__input} 
           placeholder='Login' 

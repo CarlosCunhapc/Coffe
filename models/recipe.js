@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Recipe.init({
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
+    title: DataTypes.STRING,
+    recipe: DataTypes.STRING,
     note: DataTypes.STRING,
-    userId: DataTypes.INTEGER
+    userLogin: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Recipe',

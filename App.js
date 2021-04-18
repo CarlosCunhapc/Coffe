@@ -1,12 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import AsyncStorage from '@react-native-community/async-storage';
-import Home from './views/home';
-import Login from './views/login';
-import HomeVisitor from './views/homeVisitor';
-import userHome from './views/userHome';
-import Register from './views/register';
+import Home from './views/General/home';
+import Login from './views/General/login';
+import Register from './views/General/register';
+
+import userHome from './views/User/userHome';
+import Profile from './views/User/profile';
+import UserRecipes from './views/User/recipes';
+import CreateRecipe from './views/User/createRecipe';
+import UserCuriosities from './views/User/curiosities';
+
+import HomeVisitor from './views/Visitor/homeVisitor';
+import VisitorRecipes from './views/Visitor/recipes';
+import VisitorCuriosities from './views/Visitor/curiosities';
+
 import {
 View,
 Text,
@@ -14,14 +22,13 @@ Button,
 Alert,
 } from 'react-native';
 
-
 const Stack = createStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        
+      <Stack.Navigator initialRouteName={"Home"}>
+        {/* //Telas gerais */}
         <Stack.Screen 
           name="Home" 
           component={Home}
@@ -34,20 +41,55 @@ function App() {
           options={{headerShown:false}}
         />
 
-        <Stack.Screen 
-          name="HomeVisitor" 
-          component={HomeVisitor}
+        <Stack.Screen
+          name="Register" 
+          component={Register}
         />
 
+        {/* //Telas Usuário */}
         <Stack.Screen
           name="userHome" 
           component={userHome}
         />
 
         <Stack.Screen
-          name="Register" 
-          component={Register}
+          name="Profile" 
+          component={Profile}
         />
+
+        <Stack.Screen
+          name="Recipes" 
+          component={UserRecipes}
+        />
+
+        <Stack.Screen
+          name="Create Recipe" 
+          component={CreateRecipe}
+        />
+
+        <Stack.Screen
+          name="Curiosities" 
+          component={UserCuriosities}
+        />
+
+        {/* //Telas Visitante */}
+        <Stack.Screen 
+          name="HomeVisitor" 
+          component={HomeVisitor}
+          options={{headerShown:false}}
+        />
+
+        <Stack.Screen 
+          name="VisitorRecipes" 
+          component={VisitorRecipes}
+        />
+
+        <Stack.Screen 
+          name="VisitorCuriosities" 
+          component={VisitorCuriosities}
+        />
+
+        
 
       </Stack.Navigator>
     </NavigationContainer>
