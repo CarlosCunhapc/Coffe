@@ -27,7 +27,7 @@ const Stack = createStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={"Home"}>
+      <Stack.Navigator initialRouteName={"Login"}>
         {/* //Telas gerais */}
         <Stack.Screen 
           name="Home" 

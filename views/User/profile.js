@@ -96,9 +96,6 @@ export default function App() {
       }
     }
 
-    
-  
-
     useEffect(()=>{
         async function getUser(){
           let response = await AsyncStorage.getItem('userData');

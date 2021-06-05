@@ -18,7 +18,7 @@ import { css } from '../../assets/css/cssVisitor';
 export default function HomeVisitor() {
   
   //const Tab = createMaterialBottomTabNavigator();
-  const Tab = createMaterialTopTabNavigator();
+  const Tab = createMaterialBottomTabNavigator();
   const [name, setName] = useState('Visitante');
   const [visible, setVisible] = useState(true);
 

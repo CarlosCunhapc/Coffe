@@ -25,6 +25,17 @@ app.post('/findByLogin', async (req, res)=>{
     }
 })
 
+app.post('/updateUser', async (req,res)=>{
+    let updateUser = await user.update({
+        name: req.body.name,
+        login: req.body.login,
+        email: req.body.email,
+        updatedAt: new Date(),
+    });
+    console.log(update);
+    res.send(update);
+})
+
 app.post('/create', async (req,res)=>{
     let create = await user.create({
         name: req.body.name,
