@@ -6,6 +6,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import Profile from './profile';
 import Recipes from './recipes';
 import CreateRecipe from './createRecipe';
+import userRecipes from './userRecipes';
 import Curiosities from './curiosities';
 import Ionicons from 'react-native-vector-icons/MaterialIcons';
 
@@ -50,7 +51,7 @@ export default function userHome(props) {
       >
          <Tab.Screen name="Profile" component={Profile} />
          <Tab.Screen name="Recipes" component={Recipes} />
-         <Tab.Screen name="CreateRecipe" component={CreateRecipe} />
+         <Tab.Screen name="User Recipes" component={userRecipes} />
          <Tab.Screen name="Curiosities" component={Curiosities} />
       </Tab.Navigator>
    );

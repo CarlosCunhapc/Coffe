@@ -12,6 +12,7 @@ let port=process.env.PORT || 3000;
 let user=models.User;
 let recipe=models.Recipe;
 
+//Usuários
 app.post('/findByLogin', async (req, res)=>{
     let response= await user.findOne({
         where:{login: req.body.login}
@@ -25,14 +26,30 @@ app.post('/findByLogin', async (req, res)=>{
     }
 })
 
-app.post('/updateUser', async (req,res)=>{
-    let updateUser = await user.update({
+app.post('/findById', async (req, res)=>{
+    let response= await user.findOne({
+        where:{id: req.body.id}
+    });
+    console.log(response);
+    if(response === null){
+        //console.log(response);
+    }else{
+        //console.log(response);
+        res.send(JSON.stringify('error'));
+    }
+})
+
+app.post('/update', async (req,res)=>{
+    console.log(req.body);
+    let update = await user.update({
         name: req.body.name,
         login: req.body.login,
         email: req.body.email,
         updatedAt: new Date(),
-    });
-    console.log(update);
+    }, {where: {id: req.body.id}});
+    
+    //console.log(update);
+    //console.log(req.body.id);
     res.send(update);
 })
 
@@ -59,6 +76,39 @@ app.post('/login', async (req,res)=>{
     }else{
         res.send(response);
     }
+})
+
+//Receitas
+app.post('/createRecipe', async (req,res)=>{
+    console.log(req.body);
+    let create = await recipe.create({
+        title: req.body.title,
+        recipe: req.body.recipe,
+        note: req.body.note,
+        userName: req.body.userName,
+        userId: req.body.userId,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    });
+    console.log(create);
+    res.send(create);
+})
+
+app.get('/readAllRecipes', async (req, res)=>{
+    let read = await recipe.findAll({
+        raw: true
+    });
+    // console.log(read);
+    res.send(read);
+})
+
+app.post('/readRecipes', async (req, res)=>{
+    
+    let read = await recipe.findAll({
+        where:{userId: req.body.userId}
+    });
+    res.send(read);
+    
 })
 
 app.listen(port,(req,res)=>{

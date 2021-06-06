@@ -8,13 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      title: {
         type: Sequelize.STRING
       },
-      description: {
+      recipe: {
         type: Sequelize.STRING
       },
       note: {
+        type: Sequelize.STRING
+      },
+      userName: {
         type: Sequelize.STRING
       },
       userId: {

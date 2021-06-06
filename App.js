@@ -50,6 +50,7 @@ function App() {
         <Stack.Screen
           name="userHome" 
           component={userHome}
+          options={{headerShown:false}}
         />
 
         <Stack.Screen
@@ -63,7 +64,7 @@ function App() {
         />
 
         <Stack.Screen
-          name="Create Recipe" 
+          name="CreateRecipe" 
           component={CreateRecipe}
         />
 

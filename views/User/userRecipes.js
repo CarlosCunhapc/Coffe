@@ -8,14 +8,15 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
-export default function Recipes() {
+export default function userRecipes(props) {
   const [recipes, setRecipes] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   const Item = ({ item, onPress, backgroundColor, textColor }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-      <Text style={[styles.title, textColor]}>Receita de {item.userName}</Text>
       <Text style={[styles.title, textColor]}>Nome: {item.title}</Text>
       <Text style={[styles.title, textColor]}>
         Modo de preparo: {item.recipe}
@@ -55,14 +56,32 @@ export default function Recipes() {
   });
 
   useEffect(() => {
-    async function readRecipes() {
-      let read = await fetch(`${config.urlRoot}readAllRecipes`);
-      let json = await read.json();
-      console.log(json);
-      console.log(json[0].id);
-      setRecipes(json);
+    async function getUser() {
+      let response = await AsyncStorage.getItem('userData');
+      let json = JSON.parse(response);
+      
+      setUserId(json.id);
+      
+      readRecipes();
     }
-    readRecipes();
+    //console.log(userId);
+    getUser();
+    
+    async function readRecipes() {
+      let read = await fetch(`${config.urlRoot}readRecipes`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: userId,
+        }),
+      });
+      let jsonRecipes = await read.json();
+      console.log(jsonRecipes);
+      setRecipes(jsonRecipes);
+    }
   }, []);
 
   return (
@@ -74,9 +93,10 @@ export default function Recipes() {
         extraData={selectedId}
       />
 
-      {/* <TouchableOpacity  onPress={() => find()}>
-        <Text >Find</Text>
-      </TouchableOpacity> */}
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate('CreateRecipe')}>
+        <Text>Criar Receita</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
