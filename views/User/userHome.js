@@ -8,7 +8,8 @@ import Recipes from './recipes';
 import CreateRecipe from './createRecipe';
 import userRecipes from './userRecipes';
 import Curiosities from './curiosities';
-import Ionicons from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function userHome(props) {
    const Tab = createMaterialBottomTabNavigator();
@@ -31,17 +32,18 @@ export default function userHome(props) {
                let iconName;
 
                if (route.name === 'Profile') {
-                  iconName = focused ? 'support-agent' : 'book';
+                  iconName = focused ? 'book' : 'book-outline';
                } else if (route.name === 'Recipes') {
-                  iconName = focused ? 'menu-book' : 'book';
-               } else if (route.name === 'CreateRecipe') {
-                  iconName = focused ? 'carpenter' : 'book';
+                  iconName = focused ? 'book' : 'book-outline';
+               } else if (route.name === 'User Recipes') {
+                  iconName = focused ? 'book' : 'book-outline';
                } else if (route.name === 'Curiosities') {
-                  iconName = focused ? 'question-answer' : 'book';
+                  iconName = focused ? 'book' : 'book-outline';
                }
 
                // You can return any component that you like here!
                return <Ionicons name={iconName} size={size} color={color} />;
+               
             },
          })}
          tabBarOptions={{
@@ -49,10 +51,10 @@ export default function userHome(props) {
             inactiveTintColor: 'gray',
          }}
       >
-         <Tab.Screen name="Profile" component={Profile} />
          <Tab.Screen name="Recipes" component={Recipes} />
          <Tab.Screen name="User Recipes" component={userRecipes} />
          <Tab.Screen name="Curiosities" component={Curiosities} />
+         <Tab.Screen name="Profile" component={Profile} />
       </Tab.Navigator>
    );
 }

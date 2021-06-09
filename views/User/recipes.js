@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import config from '../../config/config';
+import { css } from '../../assets/css/cssRecipes';
 import {
   FlatList,
   SafeAreaView,
@@ -14,18 +15,21 @@ export default function Recipes() {
   const [selectedId, setSelectedId] = useState(null);
 
   const Item = ({ item, onPress, backgroundColor, textColor }) => (
-    <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-      <Text style={[styles.title, textColor]}>Receita de {item.userName}</Text>
-      <Text style={[styles.title, textColor]}>Nome: {item.title}</Text>
-      <Text style={[styles.title, textColor]}>
-        Modo de preparo: {item.recipe}
+    <TouchableOpacity onPress={onPress} style={[css.item, backgroundColor]}>
+      <Text style={[css.title, textColor]}>{item.title}</Text>
+      <Text style={[css.creator, textColor]}>Criado por 
+        <Text style={[css.creatorName, textColor]}> {item.userName}{'\n'}</Text>
       </Text>
-      <Text style={[styles.title, textColor]}>{item.note}</Text>
+      {/* <Text style={[css.creatorName, textColor]}>{item.userName}</Text> */}
+      <Text style={[css.recipeFixo, textColor]}>Modo de preparo</Text>
+      <Text style={[css.recipe, textColor]}>{item.recipe}{'\n'}</Text>
+      <Text style={[css.noteFixo, textColor]}>Obs.: </Text>
+      <Text style={[css.note, textColor]}>{item.note}</Text>
     </TouchableOpacity>
   );
 
   const renderItem = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? '#000' : '#FFF';
+    const backgroundColor = item.id === selectedId ? '#ffc45e' : '#d39d38';
     const color = item.id === selectedId ? 'white' : 'black';
 
     return (
@@ -39,20 +43,20 @@ export default function Recipes() {
     );
   };
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      marginTop: StatusBar.currentHeight || 0,
-    },
-    item: {
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
-    },
-    title: {
-      fontSize: 32,
-    },
-  });
+  // const styles = StyleSheet.create({
+  //   container: {
+  //     flex: 1,
+  //     marginTop: StatusBar.currentHeight || 0,
+  //   },
+  //   item: {
+  //     padding: 20,
+  //     marginVertical: 8,
+  //     marginHorizontal: 16,
+  //   },
+  //   title: {
+  //     fontSize: 32,
+  //   },
+  // });
 
   useEffect(() => {
     async function readRecipes() {
@@ -66,7 +70,7 @@ export default function Recipes() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={css.container}>
       <FlatList
         data={recipes}
         renderItem={renderItem}

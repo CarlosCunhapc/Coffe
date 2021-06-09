@@ -3,7 +3,9 @@ import { css } from '../../assets/css/cssLogin';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as LocalAuthentication from 'expo-local-authentication';
 import config from '../../config/config';
+// import { Header } from 'react-native-elements';
 import {
+  Header,
   View,
   Text,
   TouchableOpacity,
@@ -163,21 +165,22 @@ export default function Login({ navigation }) {
         >
           <Text style={css.login__buttonText}>Logar</Text>
         </TouchableOpacity>
+        <View style={css.containerBtn}>
+          <TouchableOpacity
+            style={css.login__btnVisitor}
+            onPress={() => navigation.navigate('HomeVisitor')}
+            //onPress={()=>setDisplay('flex')}
+          >
+            <Text style={css.login__buttonText}>Visitante</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={css.login__btnCadastrar}
-          onPress={() => navigation.navigate('Register')}
-        >
-          <Text style={css.login__buttonText}>Cadastrar</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={css.login__btnCadastrar}
-          onPress={() => navigation.navigate('HomeVisitor')}
-          //onPress={()=>setDisplay('flex')}
-        >
-          <Text style={css.login__buttonText}>Acesar sem logar</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={css.login__btnCadastrar}
+            onPress={() => navigation.navigate('Register')}
+          >
+            <Text style={css.login__buttonText}>Cadastrar</Text>
+          </TouchableOpacity>
+        </View>
       </Animated.View>
     </KeyboardAvoidingView>
   );

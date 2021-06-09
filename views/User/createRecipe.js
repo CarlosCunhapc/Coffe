@@ -10,8 +10,11 @@ import {
   Image,
   Alert,
   HelperText,
+  Input,
+  Slider,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import InputRange from 'react-input-range';
 
 export default function createRecipe() {
   const [title, setTitle] = useState(null);
@@ -19,6 +22,7 @@ export default function createRecipe() {
   const [note, setNote] = useState(null);
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
+  // const [agua, setAgua] = useState(null);
 
   //Recuperando dados usuário
   useEffect(() => {
@@ -81,19 +85,29 @@ export default function createRecipe() {
           placeholder="Nomeie sua receita!"
           onChangeText={(text) => setTitle(text)}
         />
-
         <TextInput
           style={css.login__input}
           placeholder="Digite aqui a sua receita"
           onChangeText={(text) => setRecipe(text)}
         />
-
+        {/* <InputRange
+          // maxValue={20}
+          // minValue={0}
+          // value={0}
+          // onChange={(value) => setAgua({ value })}
+        /> */}
+        <Slider
+        style={css.slider}
+        minimumValue = {0}
+        maximumValue ={20}>
+          
+        </Slider>
+        
         <TextInput
           style={css.login__input}
           placeholder="Alguma observação a ser passada?"
           onChangeText={(text) => setNote(text)}
         />
-
         <TouchableOpacity style={css.login__btnLogar} onPress={() => check()}>
           <Text style={css.login__buttonText}>Salvar receita</Text>
         </TouchableOpacity>

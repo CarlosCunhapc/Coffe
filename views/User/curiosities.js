@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { css } from '../../assets/css/cssCuriosities';
 import {
   FlatList,
   SafeAreaView,
@@ -14,28 +15,23 @@ export default function curiosities() {
       id: '1',
       name: 'Curiosidade 1',
       description: 'bla bla top',
-      note: 'blah',
     },
     {
       id: '2',
       name: 'Curiosidade 2',
       description: 'bla bla top',
-      note: 'blah',
     },
     {
       id: '3',
       name: 'Curiosidade 3',
       description: 'bla bla top',
-      note: 'blah',
     },
   ];
 
   const Item = ({ item, onPress, backgroundColor, textColor }) => (
-    <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-      <Text style={[styles.title, textColor]}>{item.id}</Text>
-      <Text style={[styles.title, textColor]}>{item.name}</Text>
-      <Text style={[styles.title, textColor]}>{item.description}</Text>
-      <Text style={[styles.title, textColor]}>{item.note}</Text>
+    <TouchableOpacity onPress={onPress} style={[css.item, backgroundColor]}>
+      <Text style={[css.title, textColor]}>{item.name}</Text>
+      <Text style={[css.recipe, textColor]}>{item.description}</Text>
     </TouchableOpacity>
   );
 
@@ -55,22 +51,8 @@ export default function curiosities() {
     );
   };
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      marginTop: StatusBar.currentHeight || 0,
-    },
-    item: {
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
-    },
-    title: {
-      fontSize: 32,
-    },
-  });
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={css.container}>
       <FlatList
         data={DATA}
         renderItem={renderItem}
