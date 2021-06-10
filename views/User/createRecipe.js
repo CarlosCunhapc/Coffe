@@ -12,9 +12,9 @@ import {
   HelperText,
   Input,
   Slider,
+  CheckBox,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import InputRange from 'react-input-range';
 
 export default function createRecipe() {
   const [title, setTitle] = useState(null);
@@ -22,7 +22,9 @@ export default function createRecipe() {
   const [note, setNote] = useState(null);
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
-  // const [agua, setAgua] = useState(null);
+  const [dose, setDose] = useState(1);
+  const [agua, setAgua] = useState(1);
+  const [method, setMethod] = useState(null);
 
   //Recuperando dados usuário
   useEffect(() => {
@@ -80,29 +82,90 @@ export default function createRecipe() {
   return (
     <SafeAreaView style={css.container}>
       <View style={css.login__form}>
+        <View style={css.radio}>
+          <TouchableOpacity
+            style={css.radio2}
+            onPress={() => setMethod('Expresso')}
+          >
+            <CheckBox
+              title="Expresso"
+              checkedIcon="dot-circle-o"
+              uncheckedIcon="circle-o"
+              value={method === 'Expresso'}
+              onValueChange={() => setMethod('Expresso')}
+            />
+            <Text>Expresso</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={css.radio2}
+            onPress={() => setMethod('Filtro')}
+          >
+            <CheckBox
+              title="Filtro"
+              checkedIcon="dot-circle-o"
+              uncheckedIcon="circle-o"
+              value={method === 'Filtro'}
+              onValueChange={() => setMethod('Filtro')}
+            />
+            <Text>Filtro</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={css.radio2}
+            onPress={() => setMethod('Aeropress')}
+          >
+            <CheckBox
+              title="Aeropress"
+              checkedIcon="dot-circle-o"
+              uncheckedIcon="circle-o"
+              value={method === 'Aeropress'}
+              onValueChange={() => setMethod('Aeropress')}
+            />
+            <Text>Aeropress</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={css.sliderContainer}>
+          <Slider
+            style={css.slider}
+            value={dose}
+            minimumValue={0}
+            maximumValue={80}
+            onValueChange={(value) => setDose(value)}
+            step={1}
+          ></Slider>
+          <Text>
+            {dose} {'grama(s)'}
+          </Text>
+        </View>
+
+        <View style={css.sliderContainer}>
+          <Slider
+            style={css.slider}
+            value={agua}
+            minimumValue={0}
+            maximumValue={2}
+            onValueChange={(value) => setAgua(value)}
+            step={0.1}
+          ></Slider>
+          <Text>
+            {agua} {'litro(s)'}
+          </Text>
+        </View>
+
         <TextInput
           style={css.login__input}
           placeholder="Nomeie sua receita!"
           onChangeText={(text) => setTitle(text)}
         />
+
         <TextInput
           style={css.login__input}
-          placeholder="Digite aqui a sua receita"
+          placeholder={'Digite aqui a sua receita'}
           onChangeText={(text) => setRecipe(text)}
         />
-        {/* <InputRange
-          // maxValue={20}
-          // minValue={0}
-          // value={0}
-          // onChange={(value) => setAgua({ value })}
-        /> */}
-        <Slider
-        style={css.slider}
-        minimumValue = {0}
-        maximumValue ={20}>
-          
-        </Slider>
-        
+
         <TextInput
           style={css.login__input}
           placeholder="Alguma observação a ser passada?"

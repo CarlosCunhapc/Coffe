@@ -79,5 +79,23 @@ const css = StyleSheet.create({
         fontSize: 18,
         color: '#FFF',
     },
+    slider: {
+        width: '90%',
+    },
+    sliderContainer: {
+        width: '90%',
+        alignItems: 'center',
+    },
+    radio: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    radio2: {
+        flexDirection: 'row',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 }); 
 export {css};
