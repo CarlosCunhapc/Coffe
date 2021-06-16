@@ -9,6 +9,7 @@ import userHome from './views/User/userHome';
 import Profile from './views/User/profile';
 import UserRecipes from './views/User/recipes';
 import CreateRecipe from './views/User/createRecipe';
+import EditRecipe from './views/User/editRecipe';
 import UserCuriosities from './views/User/curiosities';
 
 import HomeVisitor from './views/Visitor/homeVisitor';
@@ -66,6 +67,11 @@ function App() {
         <Stack.Screen
           name="CreateRecipe" 
           component={CreateRecipe}
+        />
+
+        <Stack.Screen
+          name="EditRecipe" 
+          component={EditRecipe}
         />
 
         <Stack.Screen

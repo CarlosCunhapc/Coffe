@@ -18,6 +18,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 
 export default function createRecipe(props) {
+  const selectedId = props.route.params.selectedId;
   const [title, setTitle] = useState(null);
   const [recipe, setRecipe] = useState(null);
   const [note, setNote] = useState(null);
@@ -29,13 +30,25 @@ export default function createRecipe(props) {
 
   //Recuperando dados usuário
   useEffect(() => {
-    async function getUser() {
-      let response = await AsyncStorage.getItem('userData');
-      let json = JSON.parse(response);
-      setUserName(json.name);
-      setUserId(json.id);
+    async function getRecipe() {
+      let read = await fetch(`${config.urlRoot}findRecipebyId`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: selectedId,
+        }),
+      });
+
+      let json = await read.json();
+    //   console.log(json);
+    setTitle(json.title);
+    setRecipe(json.recipe);
+    setNote(json.note);
     }
-    getUser();
+    getRecipe();
   }, []);
 
   function check() {
@@ -64,17 +77,17 @@ export default function createRecipe(props) {
 
   //Envio do formulário
   async function sendForm() {
-    let response = await fetch(`${config.urlRoot}createRecipe`, {
+    let response = await fetch(`${config.urlRoot}updateRecipe`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        title: title,
         method: method,
         dose: dose,
         water: water,
+        title: title,
         recipe: recipe,
         note: note,
         userName: userName,
@@ -169,6 +182,7 @@ export default function createRecipe(props) {
         <View style={css.containerInputs}>
           <TextInput
             style={css.inputs}
+            value={title}
             placeholder="Seja criativo! :)"
             onChangeText={(text) => setTitle(text)}
           />
@@ -176,8 +190,9 @@ export default function createRecipe(props) {
 
         <Text style={css.textQuestion}>{'\n'} Receita</Text>
         <View style={css.containerInputs}>
-          <TextInput 
+          <TextInput
             style={css.inputsRecipe}
+            value={recipe}
             placeholder={'Digite aqui a sua receita'}
             onChangeText={(text) => setRecipe(text)}
           />
@@ -187,6 +202,7 @@ export default function createRecipe(props) {
         <View style={css.containerInputs}>
           <TextInput
             style={css.inputs}
+            value={note}
             placeholder="Alguma observação a ser passada?"
             onChangeText={(text) => setNote(text)}
           />

@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Recipe.init({
+    method: DataTypes.STRING,
+    dose: DataTypes.FLOAT,
+    water: DataTypes.FLOAT,
     title: DataTypes.STRING,
     recipe: DataTypes.STRING,
     note: DataTypes.STRING,

@@ -8,6 +8,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      method: {
+        type: Sequelize.STRING
+      },
+      dose: {
+        type: Sequelize.FLOAT
+      },
+      water: {
+        type: Sequelize.FLOAT
+      },
       title: {
         type: Sequelize.STRING
       },

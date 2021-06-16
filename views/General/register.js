@@ -152,6 +152,7 @@ export default function Register() {
         <TextInput
           style={css.login__input}
           placeholder="E-mail"
+          autoCompleteType= 'email'
           onChangeText={(text) => setEmail(text)}
         />
         {/* <HelperText type="error" visible={true}>

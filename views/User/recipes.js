@@ -74,7 +74,7 @@ export default function Recipes() {
       <FlatList
         data={recipes}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         extraData={selectedId}
       />
 

@@ -47,12 +47,24 @@ const css = StyleSheet.create({
     marginHorizontal: 16,
     borderRadius: 14,
   },
-  
-  fab: {
+  fabNew: {
     position: 'absolute',
     margin: 10,
     right: 3,
     bottom: 3,
+  },
+  fabRefresh: {
+    position: 'absolute',
+    margin: 10,
+    right: 3,
+    bottom: 70,
+  },
+  fabEdit: {
+    position: 'absolute',
+    margin: 10,
+    right: 70,
+    bottom: 3,
+
   },
 });
 export { css };
